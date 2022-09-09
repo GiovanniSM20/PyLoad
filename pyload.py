@@ -1,23 +1,42 @@
+from concurrent.futures import thread
 from tkinter import *
 import tkinter as tk
 from pytube import YouTube
+import pafy
+import youtube_dl
+from threading import Thread
+
+ydl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s.%(ext)s'})
 
 
 def yt_download():
     url = entry0.get()
-    try:
-        yt = YouTube(url)
-        video = yt.streams.get_highest_resolution()
-        video.download("C:/Users/Light/Desktop/coding/snake/youtube/videos")
-        notif.config(fg="green", text="Download Completed!")
-    except Exception as e:
-        print(e)
-        notif.config(
-            fg="red",
-            text=
-            "Video could not be downloaded. Perhaps the link is not copied correctly."
-        )
+    if var1.get() == 1:
+        with ydl:
+            videoAudio = pafy.new(url)
+            bestaudio = videoAudio.getbestaudio()
+            filename = bestaudio.download(
+                quiet=True,
+                filepath="C:/Users/Light/Desktop/coding/snake/youtube/videos")
+            notif.config(fg="green", text="Download Completed!")
+    else:
+        try:
+            yt = YouTube(url)
+            video = yt.streams.get_highest_resolution()
+            video.download(
+                "C:/Users/Light/Desktop/coding/snake/youtube/videos")
+            notif.config(fg="green", text="Download Completed!")
+        except Exception as e:
+            print(e)
+            notif.config(
+                fg="red",
+                text=
+                "Video could not be downloaded. Perhaps the link is not copied correctly."
+            )
 
+
+thread = Thread(target=yt_download, args=[])
+thread.start()
 
 window = tk.Tk()
 window.title("PyLoad")
@@ -43,6 +62,17 @@ entry0_bg = canvas.create_image(501.0, 300.0, image=entry0_img)
 entry0 = Entry(bd=0, bg="#000000", fg="white", highlightthickness=0)
 
 entry0.place(x=158.0, y=279, width=686.0, height=40)
+
+var1 = tk.IntVar()
+checkbox = tk.Checkbutton(window,
+                          bg="#041014",
+                          fg="white",
+                          text="Audio only",
+                          variable=var1,
+                          onvalue=1,
+                          offvalue=0,
+                          command="")
+checkbox.place(x=455, y=500)
 
 img0 = PhotoImage(file=f"./assets/img0.png")
 b0 = Button(image=img0,
