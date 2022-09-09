@@ -35,9 +35,6 @@ def yt_download():
             )
 
 
-thread = Thread(target=yt_download, args=[])
-thread.start()
-
 window = tk.Tk()
 window.title("PyLoad")
 window.iconbitmap("./assets/icon.ico")
@@ -65,8 +62,6 @@ entry0.place(x=158.0, y=279, width=686.0, height=40)
 
 var1 = tk.IntVar()
 checkbox = tk.Checkbutton(window,
-                          bg="#041014",
-                          fg="white",
                           text="Audio only",
                           variable=var1,
                           onvalue=1,
@@ -76,6 +71,7 @@ checkbox.place(x=455, y=500)
 
 img0 = PhotoImage(file=f"./assets/img0.png")
 b0 = Button(image=img0,
+            bg="#212121",
             borderwidth=0,
             highlightthickness=0,
             command=yt_download,
@@ -83,7 +79,7 @@ b0 = Button(image=img0,
 
 b0.place(x=427, y=339, width=146, height=30)
 
-notif = Label(window, font=("Segoe UI", 12))
-notif.grid(column=1, row=3, sticky=tk.S)  # not working properly
+notif = Label(window, font=("Segoe UI", 12), bg="#212121")
+notif.place(x=500, y=400)  # not working properly
 window.resizable(False, False)
 window.mainloop()
