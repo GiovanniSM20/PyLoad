@@ -1,4 +1,3 @@
-from concurrent.futures import thread
 from tkinter import *
 import tkinter as tk
 from pytube import YouTube
