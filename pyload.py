@@ -1,30 +1,34 @@
+import os
 from tkinter import *
 import tkinter as tk
 from pytube import YouTube
-import pafy
 import youtube_dl
-from threading import Thread
 
 ydl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s.%(ext)s'})
 
-
 def yt_download():
     url = entry0.get()
+    yt = YouTube(url)
     if var1.get() == 1:
         with ydl:
-            videoAudio = pafy.new(url)
-            bestaudio = videoAudio.getbestaudio()
-            filename = bestaudio.download(
-                quiet=True,
-                filepath="C:/Users/Light/Desktop/coding/snake/youtube/videos")
+            audio = yt.streams.filter(only_audio=True).first()
+
+            # You can specify the folder of the downloaded file below
+            download_file = audio.download()
+            base, ext = os.path.splitext(download_file)
+
+            new_file = base + '.mp3'
+            os.rename(download_file, new_file)
+
             notif.config(fg="green", text="Download Completed!")
+
     else:
         try:
-            yt = YouTube(url)
             video = yt.streams.get_highest_resolution()
-            video.download(
-                "C:/Users/Light/Desktop/coding/snake/youtube/videos")
+            # You can specify the folder of the downloaded file below
+            video.download()
             notif.config(fg="green", text="Download Completed!")
+
         except Exception as e:
             print(e)
             notif.config(
@@ -32,7 +36,6 @@ def yt_download():
                 text=
                 "Video could not be downloaded. Perhaps the link is not copied correctly."
             )
-
 
 window = tk.Tk()
 window.title("PyLoad")
