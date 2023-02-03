@@ -1,6 +1,7 @@
 import os
 from pytube import YouTube
 import youtube_dl
+import threading as th
 
 ydl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s.%(ext)s'})
 
@@ -26,3 +27,18 @@ class Services:
             os.rename(download_file, new_file)
 
             new_file
+
+
+class Threads:
+
+    def VideoThread(url):
+        x = th.Thread(target=Services.video_download,
+                      daemon=True,
+                      args=(url, ))
+        x.start()
+
+    def AudioThread(url):
+        y = th.Thread(target=Services.audio_download,
+                      daemon=True,
+                      args=(url, ))
+        y.start()

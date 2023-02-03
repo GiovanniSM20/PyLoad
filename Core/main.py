@@ -5,7 +5,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 import customtkinter as ctk
-from Services.app_services import Services
+from Services.app_services import *
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("dark-blue")
@@ -42,9 +42,8 @@ class App(ctk.CTk):
             font=UIFont,
             master=frame,
             text="Download",
-            command=lambda: Services.audio_download(entry0.get())
-            if checkboxValue.get() == 1 else Services.video_download(entry0.
-                                                                     get()))
+            command=lambda: Threads.AudioThread(entry0.get())
+            if checkboxValue.get() == 1 else Threads.VideoThread(entry0.get()))
         button.pack(pady=12, padx=10)
 
     # def isBoxMarked(self, url):
