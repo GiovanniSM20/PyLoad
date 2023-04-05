@@ -5,11 +5,13 @@ I'm a video editor so I tend to download videos from youtube a lot. So I decided
 
 - Git clone this repository
 
-- Open the pyload.py file in your desired IDE.
+- Runs:
 
-- Change the path you want your videos downloaded at lines 20 and 27.
-
-- Execute the script in your terminal using python pyload.py and It's ready to use.
+```bash
+pip install -r requirements.txt
+cd Core/
+python3 main.py
+```
 
 # Known Issues
 
