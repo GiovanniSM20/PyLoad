@@ -22,3 +22,5 @@ python3 main.py
 # Updates
 
 - Added the option of download audio files only using the Pafy library.
+- Execute the main.py file on PyLoad/Core using "py main.py".
+- (If you're using Python 3.11.1 use python main.py)
