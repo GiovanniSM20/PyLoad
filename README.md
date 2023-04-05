@@ -5,18 +5,5 @@ I'm a video editor so I tend to download videos from youtube a lot. So I decided
 
 - Git clone this repository
 
-- Open the pyload.py file in your desired IDE.
-
-- Change the path you want your videos downloaded at lines 20 and 27.
-
-- Execute the script in your terminal using python pyload.py and It's ready to use.
-
-# Known Issues
-
-- The app freezes for a second during the downloading process. But the videos download just fine. Working on adding multithreading to solve this.
-
-- Minor UI bugs.
-
-# Updates
-
-- Added the option of download audio files only using the Pafy library.
+- Execute the main.py file on PyLoad/Core using "py main.py".
+- (If you're using Python 3.11.1 use python main.py)
